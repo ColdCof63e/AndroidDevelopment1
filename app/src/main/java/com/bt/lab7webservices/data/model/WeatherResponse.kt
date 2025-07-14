@@ -1,4 +1,4 @@
-package com.bt.lab7webservices.models
+package com.bt.lab7webservices.data.model
 
 data class WeatherResponse(
     val weather: List<Weather>,
