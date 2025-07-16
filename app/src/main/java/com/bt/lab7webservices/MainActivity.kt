@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
 
                     WeatherScreen(
                         viewModel = weatherViewModel,
-                        apiKey = "https://openweathermap.org/",
+                        apiKey = "https://api.openweathermap.org/data/2.5/weather?q=Toronto,canada&APPID=18c0b5d0c0c97a5622a1419fb09dbe37",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
