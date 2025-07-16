@@ -4,6 +4,7 @@ data class WeatherResponse(
     val weather: List<Weather>,
     val base: String,
     val main: Main,
+    val name: String,
 )
 
 data class Weather(

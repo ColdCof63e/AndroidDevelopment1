@@ -56,6 +56,7 @@ fun WeatherScreen(viewModel: WeatherViewModel, apiKey: String) {
             is WeatherState.Loading -> CircularProgressIndicator()
             is WeatherState.Success -> {
                 val data = (state as WeatherState.Success).weather
+                Text("City: ${data.name}")
                 Text("Temperature: ${data.main.temp}°C")
                 Text("Condition: ${data.weather.firstOrNull()?.main}")
                 Text("Description: ${data.weather.firstOrNull()?.description}")
