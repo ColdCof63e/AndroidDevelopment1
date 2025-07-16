@@ -2,7 +2,6 @@ package com.bt.lab7webservices.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bt.lab7webservices.data.model.Weather
 import com.bt.lab7webservices.data.model.WeatherResponse
 import com.bt.lab7webservices.data.repository.WeatherRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,7 +16,7 @@ sealed class WeatherState {
     data class Error(val message: String): WeatherState()
 }
 
-class Weather(val repository: WeatherRepository = WeatherRepository()): ViewModel() {
+class WeatherViewModel(val repository: WeatherRepository = WeatherRepository()): ViewModel() {
     val _state = MutableStateFlow<WeatherState>(WeatherState.Idle)
     val state: StateFlow<WeatherState> = _state
 
