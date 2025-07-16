@@ -25,12 +25,12 @@ import com.bt.lab7webservices.viewmodel.WeatherState
 import com.bt.lab7webservices.viewmodel.WeatherViewModel
 
 @Composable
-fun WeatherScreen(viewModel: WeatherViewModel, apiKey: String) {
+fun WeatherScreen(viewModel: WeatherViewModel, apiKey: String, modifier: Modifier = Modifier) {
     var city by remember { mutableStateOf("") }
     val state by viewModel.state.collectAsState()
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
