@@ -9,7 +9,7 @@ import com.bt.lab7webservices.viewmodel.WeatherViewModel
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val apiKey = "https://api.openweathermap.org/data/2.5/weather?q=Toronto&appid=18c0b5d0c0c97a5622a1419fb09dbe37"
+        val apiKey = "18c0b5d0c0c97a5622a1419fb09dbe37"
 
         setContent {
             val viewModel = WeatherViewModel()
