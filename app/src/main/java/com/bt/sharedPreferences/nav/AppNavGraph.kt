@@ -38,7 +38,7 @@ fun AppNavGraph(navController: NavHostController, viewModel: UserViewModel) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Lab 6 - Narendra_N01690273") },
+                title = { Text(text = "Lab 8 - Narendra_N01690273") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color.White,
                     titleContentColor = Color.Black

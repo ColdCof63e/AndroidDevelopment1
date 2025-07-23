@@ -11,7 +11,7 @@ sealed class NavItem(
     val icon: ImageVector,
     val route: String
 ) {
-    object Info : NavItem("Info", Icons.Filled.Info, "info")
-    object Home : NavItem("Home", Icons.Filled.Home, "home")
-    object Result : NavItem("Result", Icons.Filled.CheckCircle, "result")
+    object Info : NavItem("Info", Icons.Filled.Info, "info_screen")
+    object Home : NavItem("Home", Icons.Filled.Home, "home_screen")
+    object Result : NavItem("Result", Icons.Filled.CheckCircle, "result_screen")
 }
