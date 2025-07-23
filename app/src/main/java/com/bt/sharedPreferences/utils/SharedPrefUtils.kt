@@ -1,9 +1,8 @@
 package com.bt.sharedPreferences.utils
 
 import android.content.Context
-import android.content.SharedPreferences
 
-class UserSelection (context: Context) {
+class UserPrefs (context: Context) {
     private val sharedPreferences = context.getSharedPreferences("user_selection", Context.MODE_PRIVATE)
 
     var email: String

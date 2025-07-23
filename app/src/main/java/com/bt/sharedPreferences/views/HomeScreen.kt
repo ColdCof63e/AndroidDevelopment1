@@ -19,6 +19,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -35,6 +36,12 @@ import com.bt.sharedPreferences.viewmodels.UserViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
+    val context = LocalContext.current
+
+    LaunchedEffect(Unit) {
+        userViewModel.loadFromPrefs(context)
+    }
+
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp)
     ) {
@@ -172,6 +179,8 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                     Toast.makeText(context, "Please select a subscription", Toast.LENGTH_SHORT).show()
                     return@OutlinedButton
                 }
+
+                userViewModel.saveToPrefs(context)
 
                 navController.navigate(Route.ResultScreen.routeTo)
             },
