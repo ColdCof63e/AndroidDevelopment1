@@ -63,7 +63,12 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
         // Variable for Dropdown
         val provinces = arrayOf("ON", "AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "PE", "QC", "SK", "YT")
         var selectedProvince by remember { mutableStateOf(false)}
-        var selectedProvinceIndex by remember { mutableStateOf(0)}
+        val selectedProvinceText = userViewModel.userSelection.value.province
+        var selectedProvinceIndex by remember { mutableStateOf(provinces.indexOf(selectedProvinceText).takeIf { it >= 0 } ?: 0)}
+
+        LaunchedEffect(selectedProvinceText) {
+            selectedProvinceIndex = provinces.indexOf(selectedProvinceText).takeIf { it >= 0 } ?: 0
+        }
 
         // Defining Dropdown
         Column(
@@ -107,7 +112,13 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
         // Variables for Checkbox
         val stocks = listOf("Stocks 1", "Stocks 2", "Stocks 3", "Stocks 4")
         val checkedStocks = remember { mutableStateListOf(false, false, false, false)}
-        var selectedStocks = stocks.filterIndexed { index, _ -> checkedStocks[index] }
+        val selectedStocksText = userViewModel.userSelection.value.stocks
+
+        LaunchedEffect(selectedStocksText) {
+            stocks.forEachIndexed { index, stock ->
+                checkedStocks[index] = stock in selectedStocksText
+            }
+        }
 
         // Checkbox
         Column{
@@ -118,7 +129,7 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                         checked = checkedStocks[index],
                         onCheckedChange = {
                             checkedStocks[index] = it
-                            selectedStocks = stocks.filterIndexed { i, _ -> checkedStocks[i] }
+                            val selectedStocks = stocks.filterIndexed { i, _ -> checkedStocks[i] }
                             userViewModel.updateSelection(stocks = selectedStocks)
                             Toast.makeText(context, "${if (checkedStocks[index]) "checked" else "unchecked"} $stock", Toast.LENGTH_SHORT).show()
                         }
@@ -131,6 +142,11 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
         // Variables for Radio Button
         val subscription = listOf("Monthly", "Weekly")
         var subscriptionStatus by remember { mutableStateOf("Monthly")}
+        val selectedSubscriptionText = userViewModel.userSelection.value.subscription
+
+        LaunchedEffect(selectedSubscriptionText) {
+            subscriptionStatus = selectedSubscriptionText
+        }
 
         // Defining and Displaying Radio Button
         Column {
