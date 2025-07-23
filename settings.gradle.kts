@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Lab8"
+rootProject.name = "navigationUpgrade2"
 include(":app")
  
