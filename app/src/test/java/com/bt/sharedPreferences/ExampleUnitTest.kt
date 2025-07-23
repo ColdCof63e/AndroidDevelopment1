@@ -1,4 +1,4 @@
-package com.bt.navigationupgrade2
+package com.bt.sharedPreferences
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.bt.navigationupgrade2.nav
+package com.bt.sharedPreferences.nav
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -17,10 +17,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.bt.navigationupgrade2.views.HomeScreen
-import com.bt.navigationupgrade2.views.ResultScreen
-import com.bt.navigationupgrade2.viewmodels.UserViewModel
-import com.bt.navigationupgrade2.views.InfoScreen
+import com.bt.sharedPreferences.views.HomeScreen
+import com.bt.sharedPreferences.views.ResultScreen
+import com.bt.sharedPreferences.viewmodels.UserViewModel
+import com.bt.sharedPreferences.views.InfoScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

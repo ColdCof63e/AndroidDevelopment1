@@ -1,4 +1,4 @@
-package com.bt.navigationupgrade2.views
+package com.bt.sharedPreferences.views
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.bt.navigationupgrade2.viewmodels.UserViewModel
+import com.bt.sharedPreferences.viewmodels.UserViewModel
 
 @Composable
 fun InfoScreen(navController: NavHostController, viewModel: UserViewModel) {

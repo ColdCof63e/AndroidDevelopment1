@@ -1,4 +1,4 @@
-package com.bt.navigationupgrade2.models
+package com.bt.sharedPreferences.models
 
 data class UserSelection (
     var email: String = "",

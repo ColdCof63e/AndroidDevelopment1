@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.bt.navigationupgrade2"
+    namespace = "com.bt.sharedPreferences"
     compileSdk = 35
 
     defaultConfig {

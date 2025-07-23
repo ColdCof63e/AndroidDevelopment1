@@ -1,9 +1,9 @@
-package com.bt.navigationupgrade2.viewmodels
+package com.bt.sharedPreferences.viewmodels
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
-import com.bt.navigationupgrade2.models.UserSelection
+import com.bt.sharedPreferences.models.UserSelection
 
 class UserViewModel: ViewModel() {
     private val _userSelection = mutableStateOf(UserSelection())

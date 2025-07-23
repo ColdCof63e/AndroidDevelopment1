@@ -1,4 +1,4 @@
-package com.bt.navigationupgrade2.views
+package com.bt.sharedPreferences.views
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -29,8 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.bt.navigationupgrade2.nav.Route
-import com.bt.navigationupgrade2.viewmodels.UserViewModel
+import com.bt.sharedPreferences.nav.Route
+import com.bt.sharedPreferences.viewmodels.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

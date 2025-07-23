@@ -1,4 +1,4 @@
-package com.bt.navigationupgrade2.views
+package com.bt.sharedPreferences.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,7 +10,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.bt.navigationupgrade2.viewmodels.UserViewModel
+import com.bt.sharedPreferences.viewmodels.UserViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

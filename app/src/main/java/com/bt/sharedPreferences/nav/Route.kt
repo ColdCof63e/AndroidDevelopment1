@@ -1,4 +1,4 @@
-package com.bt.navigationupgrade2.nav
+package com.bt.sharedPreferences.nav
 
 sealed class Route(val routeTo: String) {
     object InfoScreen: Route("info_screen")
