@@ -1,15 +1,17 @@
 package com.example.workoutdietplanapp.views
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FitnessCenter
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -26,12 +28,12 @@ import com.example.workoutdietplanapp.viewmodel.UserViewModel
 fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
     var selectedIndex by remember { mutableStateOf(0) }
     var showLogoutDialog by remember { mutableStateOf(false) }
+    var selectedExercise by remember { mutableStateOf<String?>(null) }
 
     val user by userViewModel.user.collectAsState()
-    val isDietSelected by userViewModel.isDietSelected.collectAsState()
     val level by userViewModel.level.collectAsState()
     val workouts by userViewModel.workouts.collectAsState()
-    val dietPlan by userViewModel.dietPlan.collectAsState()
+    val exercises = listOf("Chest", "Back", "Shoulders", "Biceps", "Triceps", "Legs")
 
     Scaffold(
         topBar = {
@@ -52,8 +54,8 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
         bottomBar = {
             NavigationBar(containerColor = Color.Black, contentColor = Color.White) {
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
-                    label = { Text("Home") },
+                    icon = { Icon(Icons.Default.FitnessCenter, contentDescription = "Home") },
+                    label = { Text("Workouts") },
                     selected = selectedIndex == 0,
                     onClick = {
                         selectedIndex = 0
@@ -113,36 +115,77 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                     color = Color.White,
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
-
-                Text(
-                    text = if (isDietSelected) "Your Diet Plan for $level" else "Your Workout Plan for $level",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.White,
-                    modifier = Modifier.padding(bottom = 12.dp)
-                )
-
-                if (isDietSelected) {
-                    dietPlan?.let { diet ->
-                        Text("• Protein: ${diet.proteinGrams}g", color = Color.White)
-                        Text("• Water: ${diet.waterGlasses} glasses", color = Color.White)
-                        Text("• Tips:", color = Color.White)
-                        diet.extraTips.forEach { tip ->
-                            Text("- $tip", color = Color.White)
+                if(selectedExercise == null) {
+                    Column{
+                        exercises.forEach { exercise ->
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(vertical = 8.dp),
+                                colors = CardDefaults.cardColors(
+                                    containerColor = Color.White.copy(
+                                        alpha = 0.1f
+                                    )
+                                ),
+                                shape = RoundedCornerShape(8.dp)
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable { selectedExercise = exercise }
+                                        .padding(16.dp)
+                                ) {
+                                    Text(exercise, color = Color.White)
+                                }
+                            }
                         }
-                    } ?: Text("No diet plan available.", color = Color.White)
+                    }
                 } else {
-                    if (workouts.isNotEmpty()) {
+                    // Optionally, add a 'Back' button
+                    TextButton(onClick = { selectedExercise = null }) {
+                        Text("← Back to Exercises", color = Color.White)
+                    }
+
+                    // Filter workouts for the selected exercise
+                    val filteredWorkouts = workouts.filter { it.workout == selectedExercise }
+
+                    if (filteredWorkouts.isNotEmpty()) {
                         LazyColumn {
-                            items(workouts.size) { index ->
-                                val w = workouts[index]
-                                Text("Day ${w.day} - ${w.workout}", color = Color.White)
-                                Text("  → ${w.variations} variations x ${w.reps} reps @ ${w.maxWeightKg}kg", color = Color.White)
-                                Spacer(modifier = Modifier.height(8.dp))
+                            items(filteredWorkouts.size) { index ->
+                                val w = filteredWorkouts[index]
+                                Card(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(vertical = 8.dp),
+                                    colors = CardDefaults.cardColors(containerColor = Color.White.copy(alpha = 0.1f)),
+                                    shape = RoundedCornerShape(8.dp)
+                                ) {
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(16.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Image(
+                                            painter = painterResource(id = getExerciseImage(exercise)),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(48.dp)
+                                        )
+                                        Text("Day ${w.day}", color = Color.White, fontWeight = FontWeight.Bold)
+                                        Text("  → ${w.variations} variations x ${w.reps} reps @ ${w.maxWeightKg}kg", color = Color.White)
+                                    }
+//                                    Column(modifier = Modifier.padding(16.dp)) {
+//                                        Text("Day ${w.day}", color = Color.White, fontWeight = FontWeight.Bold)
+//                                        Text("  → ${w.variations} variations x ${w.reps} reps @ ${w.maxWeightKg}kg", color = Color.White)
+//                                    }
+                                }
                             }
                         }
                     } else {
-                        Text("No workout plan available.", color = Color.White)
+                        Text(
+                            text = "No workouts available for $selectedExercise.",
+                            color = Color.White
+                        )
                     }
                 }
             }
@@ -172,5 +215,17 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                 }
             }
         )
+    }
+}
+
+fun getExerciseImage(exercise: String): Int {
+    return when (exercise) {
+        "Chest" -> R.drawable.chest
+        "Back" -> R.drawable.back
+        "Shoulders" -> R.drawable.shoulders
+        "Biceps" -> R.drawable.biceps
+        "Triceps" -> R.drawable.triceps
+        "Legs" -> R.drawable.legs
+        else -> R.drawable.welcome_bg
     }
 }
