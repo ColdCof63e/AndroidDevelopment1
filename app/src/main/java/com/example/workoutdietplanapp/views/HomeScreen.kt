@@ -1,6 +1,7 @@
 package com.example.workoutdietplanapp.views
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -26,12 +28,11 @@ import com.example.workoutdietplanapp.viewmodel.UserViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(0) }
     var showLogoutDialog by remember { mutableStateOf(false) }
     var selectedExercise by remember { mutableStateOf<String?>(null) }
 
     val user by userViewModel.user.collectAsState()
-    val level by userViewModel.level.collectAsState()
     val workouts by userViewModel.workouts.collectAsState()
     val exercises = listOf("Chest", "Back", "Shoulders", "Biceps", "Triceps", "Legs")
 
@@ -52,7 +53,15 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
             )
         },
         bottomBar = {
-            NavigationBar(containerColor = Color.Black, contentColor = Color.White) {
+            NavigationBar(
+                modifier = Modifier.background(
+                    Brush.horizontalGradient(
+                        colors = listOf(Color(0xFF2196f3), Color(0xFF3f51b5))
+                    )
+                ),
+                containerColor = Color.Black,
+                contentColor = Color.White
+            ) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.FitnessCenter, contentDescription = "Home") },
                     label = { Text("Workouts") },
@@ -174,10 +183,6 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                                         Text("Day ${w.day}", color = Color.White, fontWeight = FontWeight.Bold)
                                         Text("  → ${w.variations} variations x ${w.reps} reps @ ${w.maxWeightKg}kg", color = Color.White)
                                     }
-//                                    Column(modifier = Modifier.padding(16.dp)) {
-//                                        Text("Day ${w.day}", color = Color.White, fontWeight = FontWeight.Bold)
-//                                        Text("  → ${w.variations} variations x ${w.reps} reps @ ${w.maxWeightKg}kg", color = Color.White)
-//                                    }
                                 }
                             }
                         }
@@ -188,6 +193,7 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                         )
                     }
                 }
+
             }
         }
     }

@@ -68,8 +68,8 @@ fun DietScreen(navController: NavHostController, userViewModel: UserViewModel) {
                 contentColor = Color.White
             ) {
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.White) },
-                    label = { Text("Home", color = Color.White) },
+                    icon = { Icon(Icons.Default.FitnessCenter, contentDescription = "Home", tint = Color.White) },
+                    label = { Text("Workouts", color = Color.White) },
                     selected = selectedIndex == 0,
                     onClick = {
                         selectedIndex = 0

@@ -16,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -71,6 +72,11 @@ fun ProfileScreen(navController: NavHostController, userViewModel: UserViewModel
         },
         bottomBar = {
             BottomAppBar(
+                modifier = Modifier.background(
+                    Brush.horizontalGradient(
+                        colors = listOf(Color(0xFF2196f3), Color(0xFF3f51b5))
+                    )
+                ),
                 containerColor = Color.Black,
                 contentColor = Color.White
             ) {
