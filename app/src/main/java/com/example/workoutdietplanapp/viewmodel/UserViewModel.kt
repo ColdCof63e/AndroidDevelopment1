@@ -157,7 +157,7 @@ class UserViewModel : ViewModel() {
         val variations = if (level == "Advance") 5 else 3
 
         val days = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
-        val exercises = listOf("Chest", "Back&Core", "Shoulders", "Biceps", "Triceps", "Legs")
+        val exercises = listOf("Chest", "Back", "Shoulders", "Biceps", "Triceps", "Legs")
 
         return days.zip(exercises).map {
             WorkoutPlan(it.first, it.second, variations, reps, base)
