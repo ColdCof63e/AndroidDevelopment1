@@ -63,17 +63,17 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                 contentColor = Color.White
             ) {
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.FitnessCenter, contentDescription = "Home") },
-                    label = { Text("Workouts") },
+                    icon = { Icon(Icons.Default.FitnessCenter, contentDescription = "Home", tint = Color.White) },
+                    label = { Text("Workouts", color = Color.White) },
                     selected = selectedIndex == 0,
                     onClick = {
                         selectedIndex = 0
-                        // Stay on Home screen, no navigation needed
+                        navController.navigate(Route.Home.routeName)
                     }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.FitnessCenter, contentDescription = "Diet Plan") },
-                    label = { Text("Diet Plan") },
+                    icon = { Icon(Icons.Default.FitnessCenter, contentDescription = "Diet Plan", tint = Color.White) },
+                    label = { Text("Diet Plan", color = Color.White) },
                     selected = selectedIndex == 1,
                     onClick = {
                         selectedIndex = 1
@@ -81,17 +81,15 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                     }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                    label = { Text("Profile") },
+                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.White) },
+                    label = { Text("Profile", color = Color.White) },
                     selected = selectedIndex == 2,
-                    onClick = {
-                        selectedIndex = 2
-                        navController.navigate(Route.Profile.routeName)
-                    }
+                    onClick = { selectedIndex = 2
+                        navController.navigate(Route.Profile.routeName)}
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Logout, contentDescription = "Logout") },
-                    label = { Text("Logout") },
+                    icon = { Icon(Icons.Default.Logout, contentDescription = "Logout", tint = Color.White) },
+                    label = { Text("Logout", color = Color.White) },
                     selected = false,
                     onClick = { showLogoutDialog = true }
                 )

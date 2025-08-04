@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.map  // <-- Import for map extension on Flow
 @Composable
 fun ProfileScreen(navController: NavHostController, userViewModel: UserViewModel) {
     var showLogoutDialog by remember { mutableStateOf(false) }
+    var selectedIndex by remember { mutableStateOf(2) }
 
     if (showLogoutDialog) {
         AlertDialog(
@@ -71,7 +72,7 @@ fun ProfileScreen(navController: NavHostController, userViewModel: UserViewModel
             )
         },
         bottomBar = {
-            BottomAppBar(
+            NavigationBar(
                 modifier = Modifier.background(
                     Brush.horizontalGradient(
                         colors = listOf(Color(0xFF2196f3), Color(0xFF3f51b5))
@@ -80,27 +81,37 @@ fun ProfileScreen(navController: NavHostController, userViewModel: UserViewModel
                 containerColor = Color.Black,
                 contentColor = Color.White
             ) {
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    IconButton(onClick = { navController.navigate(Route.Home.routeName) }) {
-                        Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.White)
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.FitnessCenter, contentDescription = "Home", tint = Color.White) },
+                    label = { Text("Workouts", color = Color.White) },
+                    selected = selectedIndex == 0,
+                    onClick = {
+                        selectedIndex = 0
+                        navController.navigate(Route.Home.routeName)
                     }
-                    IconButton(onClick = { navController.navigate(Route.DietPlan.routeName) }) {
-                        Icon(Icons.Default.FitnessCenter, contentDescription = "Diet Plan", tint = Color.White)
+                )
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.FitnessCenter, contentDescription = "Diet Plan", tint = Color.White) },
+                    label = { Text("Diet Plan", color = Color.White) },
+                    selected = selectedIndex == 1,
+                    onClick = {
+                        selectedIndex = 1
+                        navController.navigate(Route.DietPlan.routeName)
                     }
-                    IconButton(onClick = { navController.navigate(Route.Profile.routeName) }) {
-                        Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.White)
-                    }
-
-                    IconButton(onClick = { showLogoutDialog = true }) {
-                        Icon(Icons.Default.Logout, contentDescription = "Logout", tint = Color.White)
-                    }
-                }
+                )
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.White) },
+                    label = { Text("Profile", color = Color.White) },
+                    selected = selectedIndex == 2,
+                    onClick = { selectedIndex = 2
+                        navController.navigate(Route.Profile.routeName)}
+                )
+                NavigationBarItem(
+                    icon = { Icon(Icons.Default.Logout, contentDescription = "Logout", tint = Color.White) },
+                    label = { Text("Logout", color = Color.White) },
+                    selected = false,
+                    onClick = { showLogoutDialog = true }
+                )
             }
         }
     ) { innerPadding ->
