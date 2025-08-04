@@ -167,7 +167,7 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Image(
-                                            painter = painterResource(id = getExerciseImage(exercise)),
+                                            painter = painterResource(id = getExerciseImage(selectedExercise!!)),
                                             contentDescription = null,
                                             modifier = Modifier.size(48.dp)
                                         )
