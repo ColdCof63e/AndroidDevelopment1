@@ -219,7 +219,8 @@ fun HomeScreen(navController: NavHostController, userViewModel: UserViewModel) {
                                     Text(
                                         "Beginner:\n3 Variations x 3 reps @ 15kg" +
                                                 "\nIntermediate:\n3 Variations x 5 reps @ 20kg" +
-                                                "\nAdvance:\n5 Variations x 5 reps @ 35kg"
+                                                "\nAdvance:\n5 Variations x 5 reps @ 35kg",
+                                        color = Color.White
                                     )
                                 }
                             }
